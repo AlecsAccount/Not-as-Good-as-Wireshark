@@ -10,10 +10,10 @@ PROTO_MAP = {1: "ICMP", 6: "TCP", 17: "UDP"}
 def protocol_name(proto_num):
     return PROTO_MAP.get(proto_num, f"OTHER({proto_num})")
 
-# GUI setup
+# GUI stuff
 root = tk.Tk()
 root.title("Packet Sniffer")
-root.configure(bg="#003300")  # Dark green background
+root.configure(bg="#003300")  # Makin it green
 
 text_area = scrolledtext.ScrolledText(root, bg="#002200", fg="#00FF00", font=("Consolas", 10))
 text_area.pack(expand=True, fill='both')
@@ -26,7 +26,7 @@ def log_message(msg):
     text_area.insert(tk.END, msg + "\n")
     text_area.see(tk.END)
     log_file.write(msg + "\n")   # Save to file
-    log_file.flush()             # Ensure it's written immediately
+    log_file.flush()             # Need's written immediately
 
 # Packet callback
 def packet_callback(packet):
@@ -61,7 +61,7 @@ def start_sniffing():
 # Launch sniffing in a background thread
 threading.Thread(target=start_sniffing, daemon=True).start()
 
-# Save log file via a button
+# Save log button functionality 
 def save_log():
     filename = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text Files", "*.txt")])
     if filename:
